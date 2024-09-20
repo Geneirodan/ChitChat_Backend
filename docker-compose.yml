@@ -1,0 +1,11 @@
+﻿services:
+  identity:
+    image: ${DOCKER_REGISTRY-}identity
+    build:
+      context: services/Identity
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    
+  postgres:
+    image: postgres:latest
