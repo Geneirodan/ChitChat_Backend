@@ -1,4 +1,4 @@
-namespace Identity.Web.Options;
+namespace Identity.Persistence.Options;
 
 public sealed record AdminOptions
 {

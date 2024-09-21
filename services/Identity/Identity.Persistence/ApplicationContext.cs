@@ -1,4 +1,4 @@
-using Identity.Web.Options;
+using Identity.Persistence.Options;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

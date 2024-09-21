@@ -2,6 +2,7 @@ using System.Reflection;
 using FluentValidation;
 using Identity.Emails;
 using Identity.Persistence;
+using Identity.Persistence.Options;
 using Identity.Web.Endpoints;
 using Identity.Web.Options;
 using Identity.Web.Options.Configurations;
@@ -77,4 +78,7 @@ app.MapGroup("api/v1").MapIdentityEndpoints();
 app.MapHealthChecks();
 
 await app.RunAsync();
-public partial class Program;
+namespace Identity.Web
+{
+    public partial class Program;
+}
