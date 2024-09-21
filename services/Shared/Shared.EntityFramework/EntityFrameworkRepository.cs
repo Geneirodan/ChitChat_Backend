@@ -12,13 +12,13 @@ public class EntityFrameworkRepository<TEntity>(DbContext context)
 
     public Task<TResult?> FindAsync<TResult>(
         ISingleResultSpecification<TEntity, TResult> specification,
-        CancellationToken cancellationToken = default
-    ) => _dbSet.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken);
+        CancellationToken token = default
+    ) => _dbSet.WithSpecification(specification).FirstOrDefaultAsync(token);
 
     public Task<TEntity?> FindAsync(
-        ISingleResultSpecification<TEntity> specification,
-        CancellationToken cancellationToken = default
-    ) => _dbSet.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken);
+        ISingleResultSpecification<TEntity> spec,
+        CancellationToken token = default
+    ) => _dbSet.WithSpecification(spec).FirstOrDefaultAsync(token);
 
     public Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {

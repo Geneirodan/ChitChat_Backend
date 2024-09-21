@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using Identity.Persistence;
-using Identity.Web.Extensions;
 using Identity.Web.Requests;
 using Identity.Web.Responses;
+using Identity.Web.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

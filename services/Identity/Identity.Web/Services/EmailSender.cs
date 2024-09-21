@@ -1,11 +1,11 @@
 using Identity.Emails.Services;
 using Identity.Emails.ViewModels;
 using Identity.Web.Options;
-using Identity.Web.Resources;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using Identity.Web.Resources;
 
 namespace Identity.Web.Services;
 

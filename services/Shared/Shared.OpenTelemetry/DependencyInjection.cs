@@ -18,7 +18,7 @@ public static class DependencyInjection
     {
         services.AddOpenTelemetry()
             .ConfigureResource(x =>
-                x.AddService(configuration["ServiceName"] ?? Assembly.GetEntryAssembly().GetName().Name!))
+                x.AddService(configuration["ServiceName"] ?? Assembly.GetEntryAssembly()!.GetName().Name!))
             .WithMetrics(x => x
                 .AddRuntimeInstrumentation()
                 .AddMeter(

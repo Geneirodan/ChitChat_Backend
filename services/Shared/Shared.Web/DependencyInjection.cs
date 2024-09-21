@@ -41,4 +41,15 @@ public static class DependencyInjection
         services
             .AddHttpContextAccessor()
             .AddScoped<IUser, HttpUser>();
+
+    public static IServiceCollection AddSharedLocalization(this IServiceCollection services) =>
+        services
+            .AddLocalization()
+            .AddRequestLocalization(options =>
+            {
+                string[] supportedCultures = ["en-US", "uk-UA"];
+                options.SetDefaultCulture(supportedCultures[0])
+                    .AddSupportedCultures(supportedCultures)
+                    .AddSupportedUICultures(supportedCultures);
+            });
 }

@@ -7,10 +7,10 @@ public interface IRepository<TEntity>
 {
     Task<TResult?> FindAsync<TResult>(
         ISingleResultSpecification<TEntity, TResult> specification,
-        CancellationToken cancellationToken = default
+        CancellationToken token = default
     );
 
-    Task<TEntity?> FindAsync(ISingleResultSpecification<TEntity> specification, CancellationToken cancellationToken = default);
+    Task<TEntity?> FindAsync(ISingleResultSpecification<TEntity> spec, CancellationToken token = default);
 
     Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
 

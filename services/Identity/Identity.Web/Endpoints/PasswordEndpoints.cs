@@ -1,9 +1,9 @@
 using System.Text;
 using System.Text.Encodings.Web;
 using Identity.Persistence;
-using Identity.Web.Extensions;
 using Identity.Web.Requests;
 using Identity.Web.Services;
+using Identity.Web.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

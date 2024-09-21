@@ -1,6 +1,6 @@
 using FluentValidation;
-using Identity.Web.Extensions;
 using Identity.Web.Resources;
+using Identity.Web.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 

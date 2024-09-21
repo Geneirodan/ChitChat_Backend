@@ -13,17 +13,17 @@ public class MartenRepository<TDomainAggregate, TMartenAggregate>(IDocumentSessi
 {
     public async Task<TResult?> FindAsync<TResult>(
         ISingleResultSpecification<TDomainAggregate, TResult> specification,
-        CancellationToken cancellationToken = default
+        CancellationToken token = default
     )
     {
-        var aggregate = await AggregateStreamAsync(specification, cancellationToken).ConfigureAwait(false);
+        var aggregate = await AggregateStreamAsync(specification, token).ConfigureAwait(false);
         return aggregate.Adapt<TResult>();
     }
 
     public Task<TDomainAggregate?> FindAsync(
-        ISingleResultSpecification<TDomainAggregate> specification,
-        CancellationToken cancellationToken = default
-    ) => AggregateStreamAsync(specification, cancellationToken);
+        ISingleResultSpecification<TDomainAggregate> spec,
+        CancellationToken token = default
+    ) => AggregateStreamAsync(spec, token);
 
     private async Task<TDomainAggregate?> AggregateStreamAsync(
         ISpecification<TDomainAggregate> specification,

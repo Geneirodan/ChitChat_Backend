@@ -11,46 +11,46 @@ public class EntityFrameworkReadRepository<TEntity>(DbContext context)
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
     public async Task<TResult?> GetAsync<TResult>(
-        ISpecification<TEntity, TResult> specification,
-        CancellationToken cancellationToken = default) =>
-        await _dbSet.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken);
+        ISingleResultSpecification<TEntity, TResult> spec,
+        CancellationToken token = default) =>
+        await _dbSet.WithSpecification(spec).FirstOrDefaultAsync(token);
 
     public async Task<TEntity?> GetAsync(
-        ISpecification<TEntity> specification,
-        CancellationToken cancellationToken = default) =>
-        await _dbSet.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken);
+        ISingleResultSpecification<TEntity> spec,
+        CancellationToken token = default) =>
+        await _dbSet.WithSpecification(spec).FirstOrDefaultAsync(token);
 
     public async Task<IEnumerable<TResult?>> GetAllAsync<TResult>(
-        ISpecification<TEntity, TResult> specification,
-        CancellationToken cancellationToken = default) =>
-        await _dbSet.WithSpecification(specification).ToListAsync(cancellationToken);
+        ISpecification<TEntity, TResult> spec,
+        CancellationToken token = default) =>
+        await _dbSet.WithSpecification(spec).ToListAsync(token);
 
     public async Task<IEnumerable<TEntity?>> GetAllAsync(
-        ISpecification<TEntity> specification,
-        CancellationToken cancellationToken = default) =>
-        await _dbSet.WithSpecification(specification).ToListAsync(cancellationToken);
+        ISpecification<TEntity> spec,
+        CancellationToken token = default) =>
+        await _dbSet.WithSpecification(spec).ToListAsync(token);
 
     public async Task<PaginatedList<TResult>> GetAllPaginatedAsync<TResult>(
-        ISpecification<TEntity, TResult> specification,
+        ISpecification<TEntity, TResult> spec,
         int page, int perPage,
-        CancellationToken cancellationToken = default)
+        CancellationToken token = default)
     {
-        var query = _dbSet.WithSpecification(specification);
+        var query = _dbSet.WithSpecification(spec);
 
-        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(cancellationToken);
-        var count = await query.CountAsync(cancellationToken);
+        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(token);
+        var count = await query.CountAsync(token);
         return new PaginatedList<TResult>(items, page, perPage, count);
     }
 
     public async Task<PaginatedList<TEntity>> GetAllPaginatedAsync(
-        ISpecification<TEntity> specification,
+        ISpecification<TEntity> spec,
         int page, int perPage,
-        CancellationToken cancellationToken = default)
+        CancellationToken token = default)
     {
-        var query = _dbSet.WithSpecification(specification);
+        var query = _dbSet.WithSpecification(spec);
 
-        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(cancellationToken);
-        var count = await query.CountAsync(cancellationToken);
+        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(token);
+        var count = await query.CountAsync(token);
         return new PaginatedList<TEntity>(items, page, perPage, count);
     }
 }

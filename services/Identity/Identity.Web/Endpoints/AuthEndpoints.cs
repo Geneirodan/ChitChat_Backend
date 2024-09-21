@@ -1,8 +1,8 @@
 using System.Text;
 using Identity.Persistence;
-using Identity.Web.Extensions;
 using Identity.Web.Requests;
 using Identity.Web.Services;
+using Identity.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;

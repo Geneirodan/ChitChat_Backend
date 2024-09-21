@@ -44,16 +44,8 @@ services
     .Configure<EmailOptions>(configuration.GetSection("EmailSettings"))
     .Configure<AdminOptions>(configuration.GetSection("Admin"))
     .AddScoped<ITokenService, TokenService>()
-    .AddTransient<IEmailSender, EmailSender>();
-
-services.AddLocalization();
-services.AddRequestLocalization(options =>
-{
-    string[] supportedCultures = ["en-US", "uk-UA"];
-    options.SetDefaultCulture(supportedCultures[0])
-        .AddSupportedCultures(supportedCultures)
-        .AddSupportedUICultures(supportedCultures);
-});
+    .AddTransient<IEmailSender, EmailSender>()
+    .AddSharedLocalization();
 
 var app = builder.Build();
 

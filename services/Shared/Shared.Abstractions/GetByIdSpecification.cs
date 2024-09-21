@@ -3,40 +3,35 @@ using Mapster;
 
 namespace Shared.Abstractions;
 
-public interface IPaginatedSpecification<T>;
-
-public interface IGetByIdSpecification<T>
+public interface IGetByIdSpecification<T> : ISpecification<T>
 {
     public Guid Id { get; }
 }
 
 public interface IGetByIdSpecification<T, TResult> : IGetByIdSpecification<T>;
 
-public class GetByIdSpecification<T>
-    : SingleResultSpecification<T>, IGetByIdSpecification<T>
+public sealed class GetByIdSpecification<T> : SingleResultSpecification<T>, IGetByIdSpecification<T>
     where T : IEntity<Guid>
 {
-    // ReSharper disable once VirtualMemberCallInConstructor
+    public Guid Id { get; }
+
     public GetByIdSpecification(Guid id)
     {
         Id = id;
         Query.Where(x => id.Equals(x.Id));
     }
-
-    public Guid Id { get; }
 }
 
-public class GetByIdSpecification<T, TResult>
+public sealed class GetByIdSpecification<T, TResult>
     : SingleResultSpecification<T, TResult>, IGetByIdSpecification<T, TResult>
     where T : IEntity<Guid>
 {
-    // ReSharper disable VirtualMemberCallInConstructor
+    public Guid Id { get; }
+
     public GetByIdSpecification(Guid id)
     {
         Id = id;
         Query.Where(x => id.Equals(x.Id));
         Query.Select(x => x.Adapt<TResult>());
     }
-
-    public Guid Id { get; }
 }
