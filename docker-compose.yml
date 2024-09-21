@@ -1,4 +1,14 @@
 ﻿services:
+  
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: services/Gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - identity
+      - messages.commands
+  
   identity:
     image: ${DOCKER_REGISTRY-}identity
     build:

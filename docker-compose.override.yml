@@ -1,4 +1,9 @@
 ﻿services:
+  
+  gateway:
+    ports:
+      - "8080:80"
+    
   identity:
     environment:
       - ASPNETCORE_ENVIRONMENT
