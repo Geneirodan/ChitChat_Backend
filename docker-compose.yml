@@ -2,10 +2,13 @@
   identity:
     image: ${DOCKER_REGISTRY-}identity
     build:
-      context: services/Identity
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: services/Identity/Identity.Web/Dockerfile
     depends_on:
       - postgres
     
   postgres:
     image: postgres:latest
+    
+  dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:latest

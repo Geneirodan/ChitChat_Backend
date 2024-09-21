@@ -1,3 +1,24 @@
 ﻿services:
   identity:
-    
+    environment:
+      - ASPNETCORE_ENVIRONMENT
+      - ConnectionStrings__Database=Host=postgres;Port=5432;Database=Identity;UserName=postgres;Password=postgres
+      - Jwt__Key=${JWT_KEY}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+    ports:
+      - "23450:8080"
+
+  postgres:
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+    ports:
+      - "5432:5432"
+
+  dashboard:
+    ports:
+      - "18888:18888"
+      - "4317:18889"
