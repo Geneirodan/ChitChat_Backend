@@ -7,14 +7,17 @@ namespace Shared.MediatR;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddMediatRPipeline(this IServiceCollection services, Assembly assembly) =>
-        services.AddMediatRPipeline(assembly, new MediatRPipelineOptions());
-    public static IServiceCollection AddMediatRPipeline(this IServiceCollection services, Assembly assembly,
-        MediatRPipelineOptions options)
+    public static IServiceCollection
+        AddMediatRPipeline(this IServiceCollection services, params Assembly[] assemblies) =>
+        services.AddMediatRPipeline(new MediatRPipelineOptions(), assemblies);
+
+    public static IServiceCollection AddMediatRPipeline(this IServiceCollection services,
+        MediatRPipelineOptions options,
+        params Assembly[] assemblies)
     {
         return services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssembly(assembly);
+            cfg.RegisterServicesFromAssemblies(assemblies);
 
             if (options.UseLogging)
                 cfg.AddRequestPreProcessor(typeof(IRequestPreProcessor<>), typeof(LoggingBehavior<>));

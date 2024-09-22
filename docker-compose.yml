@@ -8,6 +8,7 @@
     depends_on:
       - identity
       - messages.commands
+      - messages.queries
   
   identity:
     image: ${DOCKER_REGISTRY-}identity
@@ -16,9 +17,36 @@
       dockerfile: services/Identity/Identity.Web/Dockerfile
     depends_on:
       - postgres
+        
+  messages.commands:
+    image: ${DOCKER_REGISTRY-}messages.commands
+    build:
+      context: .
+      dockerfile: services/Messages/Commands/Messages.Commands.Web/Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
     
+  messages.queries:
+    image: ${DOCKER_REGISTRY-}messages.queries
+    build:
+      context: .
+      dockerfile: services/Messages/Queries/Messages.Queries.Web/Dockerfile
+    depends_on:
+      - mssql
+      - rabbitmq
+
   postgres:
     image: postgres:latest
     
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    
   dashboard:
     image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
+
+  redis:
+    image: redis:latest
