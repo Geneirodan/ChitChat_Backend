@@ -27,9 +27,9 @@ services
     .AddPersistence(connectionString!)
     .AddProblemDetails()
     .AddSwagger()
-    .AddOpenTelemetry(configuration)
     .AddAuthenticationAndAuthorization(configuration.GetSection("Jwt"))
-    .AddSharedLocalization();
+    .AddSharedLocalization()
+    .AddSharedOpenTelemetry(configuration);
 
 var app = builder.Build();
 
@@ -44,6 +44,8 @@ app.UseExceptionHandler()
 app.UseRequestLocalization();
 
 app.MapMessages("api/v1/messages");
+
+app.MapHealthChecks();
 
 await app.RunAsync().ConfigureAwait(false);
 

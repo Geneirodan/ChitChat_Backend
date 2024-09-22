@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Shared.OpenTelemetry\Shared.OpenTelemetry.csproj" />
       <ProjectReference Include="..\..\..\Shared\Shared.Web\Shared.Web.csproj" />
       <ProjectReference Include="..\Messages.Queries.Application\Messages.Queries.Application.csproj" />
       <ProjectReference Include="..\Messages.Queries.MassTransit\Messages.Queries.MassTransit.csproj" />

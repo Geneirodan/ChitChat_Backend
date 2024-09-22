@@ -39,13 +39,13 @@ services
     .AddSwagger()
     .AddProblemDetails()
     .AddEmailRazorService()
-    .AddOpenTelemetry(configuration)
     .Configure<ExpirationOptions>(configuration.GetSection("Expiration"))
     .Configure<EmailOptions>(configuration.GetSection("EmailSettings"))
     .Configure<AdminOptions>(configuration.GetSection("Admin"))
     .AddScoped<ITokenService, TokenService>()
     .AddTransient<IEmailSender, EmailSender>()
-    .AddSharedLocalization();
+    .AddSharedLocalization()
+    .AddSharedOpenTelemetry(configuration);
 
 var app = builder.Build();
 

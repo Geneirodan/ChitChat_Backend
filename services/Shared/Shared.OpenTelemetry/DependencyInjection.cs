@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -14,9 +15,9 @@ namespace Shared.OpenTelemetry;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
+    public static OpenTelemetryBuilder AddSharedOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOpenTelemetry()
+        var builder = services.AddOpenTelemetry()
             .ConfigureResource(x =>
                 x.AddService(configuration["ServiceName"] ?? Assembly.GetEntryAssembly()!.GetName().Name!))
             .WithMetrics(x => x
@@ -34,13 +35,14 @@ public static class DependencyInjection
                 .AddHttpClientInstrumentation()
             );
 
-        var useOtlpExporter = !string.IsNullOrEmpty(configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
-        if (!useOtlpExporter) return services;
+        if (string.IsNullOrEmpty(configuration["OTEL_EXPORTER_OTLP_ENDPOINT"])) 
+            return builder;
+        
         services.ConfigureOpenTelemetryLoggerProvider(options => options.AddOtlpExporter());
         services.ConfigureOpenTelemetryMeterProvider(options => options.AddOtlpExporter());
         services.ConfigureOpenTelemetryTracerProvider(options => options.AddOtlpExporter());
 
-        return services;
+        return builder;
     }
 
     public static ILoggingBuilder AddOpenTelemetryLogging(this ILoggingBuilder loggingBuilder)

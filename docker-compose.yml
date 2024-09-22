@@ -36,6 +36,14 @@
       - mssql
       - rabbitmq
 
+  messages.hub:
+    image: ${DOCKER_REGISTRY-}messages.hub
+    build:
+      context: .
+      dockerfile: services/Messages/Messages.SignalRNotifier/Dockerfile
+    depends_on:
+      - rabbitmq
+  
   postgres:
     image: postgres:latest
     

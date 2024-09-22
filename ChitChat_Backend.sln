@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Queries.Web", "ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Redis", "services\Shared\Shared.Redis\Shared.Redis.csproj", "{AB0BE10B-BDDA-4CD5-B0E8-EF0025ED2F7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.SignalRNotifier", "services\Messages\Messages.SignalRNotifier\Messages.SignalRNotifier.csproj", "{CE31FCB9-2890-477A-B064-A14CE36F6E26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,7 @@ Global
 		{1308799F-6094-4567-A388-3B80FD2C0FD5} = {E92EB58E-2E03-4018-9E7E-86DC833263E8}
 		{8331AEFA-E461-4EC6-B54B-16056A6E1CAC} = {E92EB58E-2E03-4018-9E7E-86DC833263E8}
 		{AB0BE10B-BDDA-4CD5-B0E8-EF0025ED2F7C} = {784699D3-9616-4E66-9795-10D5FDDA74FF}
+		{CE31FCB9-2890-477A-B064-A14CE36F6E26} = {EC3AC6B8-24F1-4440-8710-0330B70C6A59}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CEE40E27-55C9-4DC7-B75E-617E4E27140F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -188,5 +191,9 @@ Global
 		{AB0BE10B-BDDA-4CD5-B0E8-EF0025ED2F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB0BE10B-BDDA-4CD5-B0E8-EF0025ED2F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB0BE10B-BDDA-4CD5-B0E8-EF0025ED2F7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE31FCB9-2890-477A-B064-A14CE36F6E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE31FCB9-2890-477A-B064-A14CE36F6E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE31FCB9-2890-477A-B064-A14CE36F6E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE31FCB9-2890-477A-B064-A14CE36F6E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

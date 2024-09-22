@@ -44,6 +44,19 @@
     ports:
       - "23451:8080"
   
+  messages.hub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT
+      - Jwt__Key=${JWT_KEY}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__User=${RABBITMQ_USER}
+      - RabbitMQ__Pass=${RABBITMQ_PASS}
+    ports:
+      - "23454:8080"
+  
   postgres:
     restart: always
     environment:

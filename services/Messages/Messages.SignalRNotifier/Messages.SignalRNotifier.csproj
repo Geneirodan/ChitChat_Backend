@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AspNetCore.SignalR.OpenTelemetry" Version="1.4.0" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
+      <PackageReference Include="MassTransit.SignalR" Version="8.2.5" />
+      <PackageReference Include="TypedSignalR.Client.DevTools" Version="1.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.OpenTelemetry\Shared.OpenTelemetry.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Web\Shared.Web.csproj" />
+      <ProjectReference Include="..\Messages.Contracts\Messages.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>
