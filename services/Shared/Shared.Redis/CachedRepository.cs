@@ -1,11 +1,12 @@
 ﻿using Ardalis.Specification;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Shared.Abstractions;
 
 namespace Shared.Redis;
 
-public abstract class CachedRepository<T>(IRepository<T> repository, IDistributedCache cache)
-    : CachedRepositoryBase<T>(cache), IRepository<T>
+public abstract class CachedRepository<T>(IRepository<T> repository, IDistributedCache cache, ILogger logger)
+    : CachedRepositoryBase<T>(cache, logger), IRepository<T>
     where T : class, Abstractions.IEntity<Guid>
 {
     public async Task<TResult?> FindAsync<TResult>(ISingleResultSpecification<T, TResult> specification,

@@ -33,7 +33,7 @@
     environment:
       - ASPNETCORE_ENVIRONMENT
       - ConnectionStrings__Database=Server=mssql;Database=Messages;User Id=SA; Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;
-      - ConnectionStrings__Redis=redis;
+      - ConnectionStrings__Redis=redis
       - Jwt__Key=${JWT_KEY}
       - Jwt__Audience=${JWT_AUDIENCE}
       - Jwt__Issuer=${JWT_ISSUER}

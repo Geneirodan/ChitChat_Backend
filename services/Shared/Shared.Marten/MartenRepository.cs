@@ -3,6 +3,7 @@ using Shared.Abstractions;
 using Shared.Domain;
 using Ardalis.Specification;
 using Mapster;
+using Shared.Abstractions.Specifications;
 
 namespace Shared.Marten;
 

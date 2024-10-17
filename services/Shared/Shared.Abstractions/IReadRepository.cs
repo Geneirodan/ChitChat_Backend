@@ -1,4 +1,5 @@
 using Ardalis.Specification;
+using Shared.Abstractions.Specifications;
 
 namespace Shared.Abstractions;
 
@@ -26,12 +27,10 @@ public interface IReadRepository<TEntity>
     );
 
     Task<PaginatedList<TEntity>> GetAllPaginatedAsync(
-        ISpecification<TEntity> spec,
-        int page, int perPage,
+        IPaginatedSpecification<TEntity> spec,
         CancellationToken token = default);
 
     Task<PaginatedList<TResult>> GetAllPaginatedAsync<TResult>(
-        ISpecification<TEntity, TResult> spec,
-        int page, int perPage,
+        IPaginatedSpecification<TEntity, TResult> spec,
         CancellationToken token = default);
 }

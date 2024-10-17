@@ -1,7 +1,7 @@
 using Ardalis.Specification;
 using Mapster;
 
-namespace Shared.Abstractions;
+namespace Shared.Abstractions.Specifications;
 
 public interface IGetByIdSpecification<T> : ISpecification<T>
 {

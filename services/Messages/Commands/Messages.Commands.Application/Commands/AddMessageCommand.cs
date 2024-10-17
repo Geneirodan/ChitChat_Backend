@@ -4,6 +4,7 @@ using MediatR;
 using Messages.Commands.Application.Interfaces;
 using Messages.Commands.Domain;
 using Shared.Abstractions;
+using Shared.Abstractions.Specifications;
 using Shared.MediatR.Attributes;
 
 namespace Messages.Commands.Application.Commands;

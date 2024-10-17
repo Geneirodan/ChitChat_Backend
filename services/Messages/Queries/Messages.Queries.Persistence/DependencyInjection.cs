@@ -11,6 +11,7 @@ public static class DependencyInjection
         return services
             .AddDbContext<ApplicationContext>(x => x.UseSqlServer(connectionString))
             .AddScoped<IMessageRepository, MessageRepository>()
-            .AddScoped<IMessageReadRepository, MessageReadRepository>();
+            .AddScoped<IMessageReadRepository, MessageReadRepository>()
+            .Decorate<IMessageReadRepository, CachedMessageReadRepository>();
     }
 }

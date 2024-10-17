@@ -2,6 +2,7 @@ using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shared.Abstractions;
+using Shared.Abstractions.Specifications;
 
 namespace Shared.EntityFramework;
 
@@ -31,26 +32,20 @@ public class EntityFrameworkReadRepository<TEntity>(DbContext context)
         await _dbSet.WithSpecification(spec).ToListAsync(token);
 
     public async Task<PaginatedList<TResult>> GetAllPaginatedAsync<TResult>(
-        ISpecification<TEntity, TResult> spec,
-        int page, int perPage,
+        IPaginatedSpecification<TEntity, TResult> spec,
         CancellationToken token = default)
     {
-        var query = _dbSet.WithSpecification(spec);
-
-        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(token);
-        var count = await query.CountAsync(token);
-        return new PaginatedList<TResult>(items, page, perPage, count);
+        var items = await _dbSet.WithSpecification(spec).ToArrayAsync(token);
+        var count = await SpecificationEvaluator.Default.GetQuery(_dbSet, spec, true).CountAsync(token);
+        return new PaginatedList<TResult>(items, spec.Page, spec.PageSize, count);
     }
 
     public async Task<PaginatedList<TEntity>> GetAllPaginatedAsync(
-        ISpecification<TEntity> spec,
-        int page, int perPage,
+        IPaginatedSpecification<TEntity> spec,
         CancellationToken token = default)
     {
-        var query = _dbSet.WithSpecification(spec);
-
-        var items = await query.Skip((page - 1) * perPage).Take(perPage).ToArrayAsync(token);
-        var count = await query.CountAsync(token);
-        return new PaginatedList<TEntity>(items, page, perPage, count);
+        var items = await _dbSet.WithSpecification(spec).ToArrayAsync(token);
+        var count = await SpecificationEvaluator.Default.GetQuery(_dbSet, spec, true).CountAsync(token);
+        return new PaginatedList<TEntity>(items, spec.Page, spec.PageSize, count);
     }
 }

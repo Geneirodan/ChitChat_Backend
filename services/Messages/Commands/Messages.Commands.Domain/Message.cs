@@ -14,7 +14,7 @@ public class Message : Aggregate
 
     public Guid ReceiverId { get; protected set; }
 
-    public static (Message message, CreatedEvent @event) CreateInstance(Guid id, string content,
+    public static (Message Message, CreatedEvent Event) CreateInstance(Guid id, string content,
         DateTime sendTime, Guid senderId, Guid receiverId)
     {
         var message = new Message

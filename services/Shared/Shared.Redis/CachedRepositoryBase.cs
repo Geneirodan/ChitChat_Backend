@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
 using Ardalis.Specification;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 
 namespace Shared.Redis;
 
-public abstract class CachedRepositoryBase<T>(IDistributedCache cache)
+public abstract class CachedRepositoryBase<T>(IDistributedCache cache, ILogger logger)
 {
     protected async Task<TResult> InvokeWithCacheAsync<TResult>(
         ISpecification<T> specification,
@@ -18,7 +19,11 @@ public abstract class CachedRepositoryBase<T>(IDistributedCache cache)
         var value = await cache.GetStringAsync(specification.CacheKey, cancellationToken).ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(value))
+        {
+            logger.LogInformation("Cache Hit: {key}", specification.CacheKey);
             return JsonSerializer.Deserialize<TResult>(value)!;
+        }
+        logger.LogInformation("Cache Miss: {key}", specification.CacheKey);
 
         var entity = await initialFunc.Invoke().ConfigureAwait(false);
 

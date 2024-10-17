@@ -2,6 +2,7 @@ using GraphQL.AspNet.Attributes;
 using GraphQL.AspNet.Controllers;
 using MediatR;
 using Messages.Queries.Application;
+using Messages.Queries.Application.Queries;
 using Messages.Queries.Persistence.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Shared.Abstractions;

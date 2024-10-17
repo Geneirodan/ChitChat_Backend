@@ -2,6 +2,7 @@ using Ardalis.Result.AspNetCore;
 using Mapster;
 using MediatR;
 using Messages.Queries.Application;
+using Messages.Queries.Application.Queries;
 using Messages.Queries.Web.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;

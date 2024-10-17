@@ -9,10 +9,12 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+      <PackageReference Include="Scrutor" Version="4.2.2" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\Shared.EntityFramework\Shared.EntityFramework.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Shared.Redis\Shared.Redis.csproj" />
     </ItemGroup>
 
 </Project>

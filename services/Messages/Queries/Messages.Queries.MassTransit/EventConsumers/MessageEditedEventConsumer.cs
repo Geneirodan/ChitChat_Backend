@@ -3,6 +3,7 @@ using Messages.Contracts;
 using Messages.Queries.Persistence.Entities;
 using Messages.Queries.Persistence.Repositories;
 using Shared.Abstractions;
+using Shared.Abstractions.Specifications;
 
 namespace Messages.Queries.MassTransit.EventConsumers;
 
