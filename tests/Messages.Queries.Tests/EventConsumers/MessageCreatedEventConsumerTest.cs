@@ -4,6 +4,7 @@ using Messages.Contracts;
 using Messages.Queries.MassTransit.EventConsumers;
 using Messages.Queries.Persistence.Entities;
 using Messages.Queries.Persistence.Repositories;
+using Microsoft.Extensions.Caching.Distributed;
 using Moq;
 using Shared.Abstractions.Specifications;
 
@@ -13,9 +14,11 @@ namespace Messages.Queries.Tests.EventConsumers;
 public class MessageCreatedEventConsumerTest
 {
     private readonly Mock<IMessageRepository> _repository = new();
+    private readonly Mock<IDistributedCache> _cache = new();
     private readonly MessageCreatedEventConsumer _consumer;
 
-    public MessageCreatedEventConsumerTest() => _consumer = new MessageCreatedEventConsumer(_repository.Object);
+    public MessageCreatedEventConsumerTest() =>
+        _consumer = new MessageCreatedEventConsumer(_repository.Object, _cache.Object);
 
     [Theory, MemberData(nameof(ConsumeData))]
     public async Task Consume(MessageCreatedEvent @event, bool exists)
@@ -23,7 +26,8 @@ public class MessageCreatedEventConsumerTest
         var context = new Mock<ConsumeContext<MessageCreatedEvent>>();
         context.Setup(x => x.Message).Returns(@event);
         _repository.Setup(x =>
-                x.FindAsync(It.Is<GetByIdSpecification<Message>>(y => y.Id == @event.Id), It.IsAny<CancellationToken>()))
+                x.FindAsync(It.Is<GetByIdSpecification<Message>>(y => y.Id == @event.Id),
+                    It.IsAny<CancellationToken>()))
             .ReturnsAsync(exists ? new Message() : null);
 
         await _consumer.Consume(context.Object);
