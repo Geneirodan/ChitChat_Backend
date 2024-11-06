@@ -10,8 +10,8 @@ public interface IGetByIdSpecification<T> : ISpecification<T>
 
 public interface IGetByIdSpecification<T, TResult> : IGetByIdSpecification<T>;
 
-public sealed class GetByIdSpecification<T> : SingleResultSpecification<T>, IGetByIdSpecification<T>
-    where T : IEntity<Guid>
+public class GetByIdSpecification<T> : SingleResultSpecification<T>, IGetByIdSpecification<T>
+    where T : class, IEntity<Guid>
 {
     public Guid Id { get; }
 
@@ -22,9 +22,9 @@ public sealed class GetByIdSpecification<T> : SingleResultSpecification<T>, IGet
     }
 }
 
-public sealed class GetByIdSpecification<T, TResult>
+public class GetByIdSpecification<T, TResult>
     : SingleResultSpecification<T, TResult>, IGetByIdSpecification<T, TResult>
-    where T : IEntity<Guid>
+    where T : class, IEntity<Guid>
 {
     public Guid Id { get; }
 

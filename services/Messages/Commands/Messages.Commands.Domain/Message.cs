@@ -40,7 +40,7 @@ public class Message : Aggregate
     public EditedEvent Edit(string content)
     {
         Content = content;
-        var @event = new EditedEvent(Id, Content);
+        var @event = new EditedEvent(Id, Content, SenderId, ReceiverId);
         Enqueue(@event);
         return @event;
     }
@@ -49,7 +49,7 @@ public class Message : Aggregate
     public ReadEvent Read()
     {
         IsRead = true;
-        var @event = new ReadEvent(Id);
+        var @event = new ReadEvent(Id, SenderId, ReceiverId);
         Enqueue(@event);
         return @event;
     }
@@ -58,20 +58,36 @@ public class Message : Aggregate
     public DeletedEvent Delete()
     {
         IsDeleted = true;
-        var @event = new DeletedEvent(Id);
+        var @event = new DeletedEvent(Id, SenderId, ReceiverId);
         Enqueue(@event);
         return @event;
     }
 
+    [Serializable]
     public sealed record CreatedEvent(
         Guid Id,
         string Content,
         DateTime SendTime,
         Guid SenderId,
         Guid ReceiverId
-    ) : DomainEvent(Id);
-    
-    public sealed record EditedEvent(Guid Id, string Content) : DomainEvent(Id);
-    public sealed record ReadEvent(Guid Id) : DomainEvent(Id);
-    public sealed record DeletedEvent(Guid Id) : DomainEvent(Id);
+    ) : IMessageEvent;
+
+    [Serializable]
+    public sealed record EditedEvent(Guid Id, string Content, Guid SenderId, Guid ReceiverId)
+        : IMessageEvent;
+
+    [Serializable]
+    public sealed record ReadEvent(Guid Id, Guid SenderId, Guid ReceiverId) 
+        : IMessageEvent;
+
+    [Serializable]
+    public sealed record DeletedEvent(Guid Id, Guid SenderId, Guid ReceiverId) 
+        : IMessageEvent;
+
+    private interface IMessageEvent : IDomainEvent
+    {
+        public Guid SenderId { get;}
+        public Guid ReceiverId { get;  }
+
+    }
 }

@@ -16,15 +16,15 @@ public class ReadMessageCommandTest
     {
         _user.Setup(x => x.Id)
             .Returns(userId);
+        var message = TestData.ValidMessages.FirstOrDefault(message => message.Id == command.Id);
         _repository.Setup(x => x.FindAsync(It.Is<GetByIdSpecification<Message>>(s => s.Id == command.Id), default))
-            .ReturnsAsync(TestData.ValidMessages.FirstOrDefault(message => message.Id == command.Id));
+            .ReturnsAsync(message);
 
         var result = await _handler.Handle(command, default);
 
         result.IsSuccess.Should().Be(expectedResult.IsSuccess);
-
         var times = expectedResult.IsSuccess ? Times.Once() : Times.Never();
-        _repository.Verify(x => x.UpdateAsync(It.IsAny<Message>(), default), times);
+        _repository.Verify(x => x.UpdateAsync(It.Is<Message>(y => y.IsRead), default), times);
         _repository.Verify(x => x.SaveChangesAsync(default), times);
         _publisher.Verify(x => x.Publish(It.IsAny<Message.ReadEvent>(), default), times);
     }
@@ -34,23 +34,28 @@ public class ReadMessageCommandTest
         {
             {
                 new ReadMessageCommand(TestData.ValidIds[0]),
-                Result.Forbidden(), TestData.ValidMessages[0].SenderId
+                Result.Forbidden(),
+                TestData.ValidMessages[0].SenderId
             },
             {
                 new ReadMessageCommand(TestData.ValidIds[0]),
-                Result.Success(), TestData.ValidMessages[0].ReceiverId
+                Result.Success(),
+                TestData.ValidMessages[0].ReceiverId
             },
             {
                 new ReadMessageCommand(TestData.ValidIds[0]),
-                Result.Forbidden(), Guid.NewGuid()
+                Result.Forbidden(),
+                Guid.NewGuid()
             },
             {
                 new ReadMessageCommand(Guid.NewGuid()),
-                Result.Unauthorized(), null
+                Result.Unauthorized(),
+                null
             },
             {
                 new ReadMessageCommand(Guid.NewGuid()),
-                Result.NotFound(), Guid.NewGuid()
+                Result.NotFound(),
+                Guid.NewGuid()
             },
         };
 }

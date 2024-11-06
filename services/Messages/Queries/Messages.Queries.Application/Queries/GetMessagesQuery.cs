@@ -11,7 +11,7 @@ namespace Messages.Queries.Application.Queries;
 public sealed record GetMessagesQuery(int Page, int PerPage, Guid ReceiverId, string Search)
     : IRequest<Result<PaginatedList<Message>>>
 {
-    public sealed class Specification : PaginatedSpecification<Message>
+    private sealed class Specification : PaginatedSpecification<Message>
     {
         public Specification(string searchTerm, Guid senderId, Guid receiverId, int page, int perPage) : base(page, perPage)
         {
@@ -20,7 +20,7 @@ public sealed record GetMessagesQuery(int Page, int PerPage, Guid ReceiverId, st
             if (!string.IsNullOrWhiteSpace(searchTerm))
                 Query.Search(x => x.Content, searchTerm);
             Query.EnableCache("Messages", senderId, receiverId, searchTerm, page, perPage);
-
+            Query.OrderByDescending(x => x.SendTime);
         }
     }
 
@@ -38,7 +38,6 @@ public sealed record GetMessagesQuery(int Page, int PerPage, Guid ReceiverId, st
             var (page, perPage, receiverId, search) = request;
 
             var filter = new Specification(search, user.Id.Value, receiverId, page, perPage);
-
             return await repository.GetAllPaginatedAsync(filter, cancellationToken)
                 .ConfigureAwait(false);
         }

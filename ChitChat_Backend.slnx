@@ -1,0 +1,50 @@
+﻿<Solution>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Gateway/">
+    <File Path="services\Gateway\Dockerfile" />
+    <File Path="services\Gateway\nginx.conf" />
+  </Folder>
+  <Folder Name="/Services/Identity/">
+    <Project Path="services\Identity\Identity.Emails\Identity.Emails.csproj" Type="Classic C#" />
+    <Project Path="services\Identity\Identity.Persistence\Identity.Persistence.csproj" Type="Classic C#" />
+    <Project Path="services\Identity\Identity.Web\Identity.Web.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Services/Messages/">
+    <Project Path="services\Messages\Messages.Contracts\Messages.Contracts.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Messages.SignalRNotifier\Messages.SignalRNotifier.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Services/Messages/Commands/">
+    <Project Path="services\Messages\Commands\Messages.Commands.Application\Messages.Commands.Application.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Commands\Messages.Commands.Domain\Messages.Commands.Domain.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Commands\Messages.Commands.MassTransit\Messages.Commands.MassTransit.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Commands\Messages.Commands.Persistence\Messages.Commands.Persistence.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Commands\Messages.Commands.Web\Messages.Commands.Web.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Services/Messages/Queries/">
+    <Project Path="services\Messages\Queries\Messages.Queries.Application\Messages.Queries.Application.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Queries\Messages.Queries.MassTransit\Messages.Queries.MassTransit.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Queries\Messages.Queries.Persistence\Messages.Queries.Persistence.csproj" Type="Classic C#" />
+    <Project Path="services\Messages\Queries\Messages.Queries.Web\Messages.Queries.Web.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Services/Messages/SignalRNotifier/" />
+  <Folder Name="/Services/Shared/">
+    <Project Path="services\Shared\Shared.Abstractions\Shared.Abstractions.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.Domain\Shared.Domain.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.EntityFramework\Shared.EntityFramework.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.Marten\Shared.Marten.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.MediatR\Shared.MediatR.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.OpenTelemetry\Shared.OpenTelemetry.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.Redis\Shared.Redis.csproj" Type="Classic C#" />
+    <Project Path="services\Shared\Shared.Web\Shared.Web.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="docker-compose.yml" />
+    <File Path="docker-compose.override.yml" />
+    <File Path=".env" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Messages.SignalRNotifier.Tests\Messages.SignalRNotifier.Tests.csproj" Type="Classic C#" />
+    <Project Path="tests\Messages.Commands.Tests\Messages.Commands.Tests.csproj" Type="Classic C#" />
+    <Project Path="tests\Messages.Queries.Tests\Messages.Queries.Tests.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

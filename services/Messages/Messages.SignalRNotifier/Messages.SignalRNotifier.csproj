@@ -9,8 +9,8 @@
 
     <ItemGroup>
       <PackageReference Include="AspNetCore.SignalR.OpenTelemetry" Version="1.4.0" />
-      <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
-      <PackageReference Include="MassTransit.SignalR" Version="8.2.5" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
+      <PackageReference Include="MassTransit.SignalR" Version="8.3.0" />
       <PackageReference Include="TypedSignalR.Client.DevTools" Version="1.2.4" />
     </ItemGroup>
 

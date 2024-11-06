@@ -4,6 +4,7 @@ using MassTransit;
 using MassTransit.Logging;
 using MassTransit.Monitoring;
 using MassTransit.SignalR;
+using Messages.SignalRNotifier;
 using Messages.SignalRNotifier.Hubs;
 using OpenTelemetry.Resources;
 using Shared.OpenTelemetry;
@@ -23,6 +24,7 @@ services
             configurator.SetEndpointNameFormatter(new DefaultEndpointNameFormatter(prefix));
             configurator.AddSignalRHub<ChatHub>();
             configurator.AddConsumers(Assembly.GetExecutingAssembly());
+            configurator.AddConsumeObserver<ConsumeObserver>();
             configurator.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
         }
     )
@@ -52,27 +54,3 @@ app.UseAuthentication()
 app.MapHub<ChatHub>("/api/v1/chat");
 
 await app.RunAsync().ConfigureAwait(false);
-
-public class ConsumeObserver(ILogger<ConsumeObserver> logger) : IConsumeObserver
-{
-    private readonly ILogger<ConsumeObserver> _logger = logger;
-
-    public Task ConsumeFault<T>(ConsumeContext<T> context, Exception exception) where T : class
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task PostConsume<T>(ConsumeContext<T> context) where T : class
-    {
-        //use _logger
-
-        return Task.CompletedTask;
-    }
-
-    public Task PreConsume<T>(ConsumeContext<T> context) where T : class
-    {
-        //use _logger
-
-        return Task.CompletedTask;
-    }
-}

@@ -1,5 +1,6 @@
 namespace Messages.Contracts;
 
 
+[Serializable]
 public sealed record MessageReadEvent(Guid Id, Guid SenderId, Guid ReceiverId) 
-    : MessageEvent(Id, SenderId, ReceiverId);
+    : IMessageEvent;

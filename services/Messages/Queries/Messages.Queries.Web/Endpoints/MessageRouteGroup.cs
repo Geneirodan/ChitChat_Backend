@@ -12,16 +12,29 @@ namespace Messages.Queries.Web.Endpoints;
 internal static class MessageRouteGroup
 {
     private const string RouteGroupName = "messages";
-    public static void MapMessages(this IEndpointRouteBuilder app, string prefix) =>
-        app.MapGet(prefix, GetMessages).WithTags(RouteGroupName).RequireAuthorization();
+
+    public static void MapMessages(this IEndpointRouteBuilder app, string prefix)
+    {
+        var group = app.MapGroup(prefix).WithTags(RouteGroupName).RequireAuthorization();
+        group.MapGet("/", GetMessages);
+        group.MapGet("/{id:guid}", GetMessageById);
+    }
+
+    private static async Task<IResult> GetMessageById(
+        [FromRoute] Guid id,
+        [FromServices] ISender mediator
+    )
+    {
+        var query = new GetMessageByIdQuery(id);
+        var result = await mediator.Send(query).ConfigureAwait(false);
+        return result.ToMinimalApiResult();
+    }
 
     private static async Task<IResult> GetMessages(
         [AsParameters] GetMessagesRequest request,
-        [FromServices] ISender mediator,
-        [FromServices] IDistributedCache cache
+        [FromServices] ISender mediator
     )
     {
-        var (receiverId, search, page, perPage) = request;
         var query = request.Adapt<GetMessagesQuery>();
         var result = await mediator.Send(query).ConfigureAwait(false);
         return result.ToMinimalApiResult();

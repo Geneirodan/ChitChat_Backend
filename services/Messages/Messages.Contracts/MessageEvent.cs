@@ -2,4 +2,8 @@ using Shared.Domain;
 
 namespace Messages.Contracts;
 
-public record MessageEvent(Guid Id, Guid SenderId, Guid ReceiverId) : IntegrationEvent(Id);
+public interface IMessageEvent : IIntegrationEvent
+{
+    public Guid SenderId { get;  }
+    public Guid ReceiverId { get; }
+}
