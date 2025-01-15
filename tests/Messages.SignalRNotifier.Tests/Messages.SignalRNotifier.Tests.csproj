@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\services\Messages\Messages.SignalRNotifier\Messages.SignalRNotifier.csproj" />
+      <ProjectReference Include="..\..\services\Messages\Messages.SignalRNotifier\Messages.SignalRNotifier.csproj" />
     </ItemGroup>
 
 </Project>

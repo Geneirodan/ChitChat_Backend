@@ -45,14 +45,12 @@ public static class DependencyInjection
         return builder;
     }
 
-    public static ILoggingBuilder AddOpenTelemetryLogging(this ILoggingBuilder loggingBuilder)
-    {
-        return loggingBuilder.AddOpenTelemetry(x =>
+    public static ILoggingBuilder AddOpenTelemetryLogging(this ILoggingBuilder loggingBuilder) =>
+        loggingBuilder.AddOpenTelemetry(x =>
         {
             x.IncludeScopes = true;
             x.IncludeFormattedMessage = true;
         });
-    }
 
     public static IEndpointRouteBuilder MapHealthChecks(this IEndpointRouteBuilder builder)
     {

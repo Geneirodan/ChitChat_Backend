@@ -43,7 +43,7 @@
     <File Path=".env" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="Messages.SignalRNotifier.Tests\Messages.SignalRNotifier.Tests.csproj" Type="Classic C#" />
+    <Project Path="tests\Messages.SignalRNotifier.Tests\Messages.SignalRNotifier.Tests.csproj" Type="Classic C#" />
     <Project Path="tests\Messages.Commands.Tests\Messages.Commands.Tests.csproj" Type="Classic C#" />
     <Project Path="tests\Messages.Queries.Tests\Messages.Queries.Tests.csproj" Type="Classic C#" />
   </Folder>

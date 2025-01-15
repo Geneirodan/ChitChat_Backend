@@ -9,7 +9,7 @@ public sealed class AuthorizeAttribute : Attribute
     public AuthorizeAttribute() { }
 
     /// <summary>
-    /// Gets or sets a comma delimited list of roles that are allowed to access the resource.
+    /// Gets or sets a comma-delimited list of roles that are allowed to access the resource.
     /// </summary>
     public string Roles { get; init; } = string.Empty;
 
